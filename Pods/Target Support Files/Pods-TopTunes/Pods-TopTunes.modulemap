@@ -1,0 +1,6 @@
+framework module Pods_TopTunes {
+  umbrella header "Pods-TopTunes-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,13 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		197E0CECBCA2EF0EE5664BD0 /* Pods_TopTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48724F6EA7AF4FF410E9E837 /* Pods_TopTunes.framework */; };
 		F00551F81CA412E900AA84EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00551F71CA412E900AA84EC /* AppDelegate.swift */; };
-		F00551FA1CA412E900AA84EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00551F91CA412E900AA84EC /* ViewController.swift */; };
-		F00551FD1CA412E900AA84EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F00551FB1CA412E900AA84EC /* Main.storyboard */; };
 		F00551FF1CA412E900AA84EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F00551FE1CA412E900AA84EC /* Assets.xcassets */; };
-		F00552021CA412E900AA84EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F00552001CA412E900AA84EC /* LaunchScreen.storyboard */; };
 		F005520D1CA412E900AA84EC /* TopTunesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005520C1CA412E900AA84EC /* TopTunesTests.swift */; };
 		F00552181CA412E900AA84EC /* TopTunesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00552171CA412E900AA84EC /* TopTunesUITests.swift */; };
+		F00552341CA4133C00AA84EC /* TrackListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00552271CA4133C00AA84EC /* TrackListTableViewController.swift */; };
+		F00552361CA4133C00AA84EC /* TrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00552291CA4133C00AA84EC /* TrackCell.xib */; };
+		F00552371CA4133C00AA84EC /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005522A1CA4133C00AA84EC /* TrackCell.swift */; };
+		F00552381CA4133C00AA84EC /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005522B1CA4133C00AA84EC /* Track.swift */; };
+		F00552391CA4133C00AA84EC /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005522C1CA4133C00AA84EC /* SearchAPI.swift */; };
+		F005523A1CA4133C00AA84EC /* PreviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005522D1CA4133C00AA84EC /* PreviewButton.swift */; };
+		F005523B1CA4133C00AA84EC /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F005522E1CA4133C00AA84EC /* ErrorCell.xib */; };
+		F005523C1CA4133C00AA84EC /* NoResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F005522F1CA4133C00AA84EC /* NoResultCell.xib */; };
+		F005523D1CA4133C00AA84EC /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00552301CA4133C00AA84EC /* LoadingCell.xib */; };
+		F00552411CA4134F00AA84EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F005523F1CA4134F00AA84EC /* Main.storyboard */; };
+		F05EA8531CA45A5F00585EF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EA8521CA45A5F00585EF3 /* Constants.swift */; };
+		F05EA8551CA463ED00585EF3 /* itunes-apple-com-success.json in Resources */ = {isa = PBXBuildFile; fileRef = F05EA8541CA463ED00585EF3 /* itunes-apple-com-success.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,19 +44,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48724F6EA7AF4FF410E9E837 /* Pods_TopTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TopTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D4F7580605421A67944EAED /* Pods-TopTunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopTunes.release.xcconfig"; path = "Pods/Target Support Files/Pods-TopTunes/Pods-TopTunes.release.xcconfig"; sourceTree = "<group>"; };
+		905EA9E05B35E110003F2C87 /* Pods-TopTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TopTunes/Pods-TopTunes.debug.xcconfig"; sourceTree = "<group>"; };
 		F00551F41CA412E900AA84EC /* TopTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F00551F71CA412E900AA84EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F00551F91CA412E900AA84EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F00551FC1CA412E900AA84EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F00551FE1CA412E900AA84EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F00552011CA412E900AA84EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F00552031CA412E900AA84EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F00552081CA412E900AA84EC /* TopTunesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopTunesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F005520C1CA412E900AA84EC /* TopTunesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTunesTests.swift; sourceTree = "<group>"; };
 		F005520E1CA412E900AA84EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F00552131CA412E900AA84EC /* TopTunesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopTunesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F00552171CA412E900AA84EC /* TopTunesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTunesUITests.swift; sourceTree = "<group>"; };
 		F00552191CA412E900AA84EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F00552271CA4133C00AA84EC /* TrackListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListTableViewController.swift; sourceTree = "<group>"; };
+		F00552291CA4133C00AA84EC /* TrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackCell.xib; sourceTree = "<group>"; };
+		F005522A1CA4133C00AA84EC /* TrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		F005522B1CA4133C00AA84EC /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		F005522C1CA4133C00AA84EC /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		F005522D1CA4133C00AA84EC /* PreviewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewButton.swift; sourceTree = "<group>"; };
+		F005522E1CA4133C00AA84EC /* ErrorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
+		F005522F1CA4133C00AA84EC /* NoResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoResultCell.xib; sourceTree = "<group>"; };
+		F00552301CA4133C00AA84EC /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		F00552311CA4133C00AA84EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F005523F1CA4134F00AA84EC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F05EA8521CA45A5F00585EF3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F05EA8541CA463ED00585EF3 /* itunes-apple-com-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "itunes-apple-com-success.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197E0CECBCA2EF0EE5664BD0 /* Pods_TopTunes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +97,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ABB65DFA5BBA1710B069F306 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				905EA9E05B35E110003F2C87 /* Pods-TopTunes.debug.xcconfig */,
+				8D4F7580605421A67944EAED /* Pods-TopTunes.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EAEB6B7ED9E5E71780AD9EE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48724F6EA7AF4FF410E9E837 /* Pods_TopTunes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F00551EB1CA412E900AA84EC = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +121,8 @@
 				F005520B1CA412E900AA84EC /* TopTunesTests */,
 				F00552161CA412E900AA84EC /* TopTunesUITests */,
 				F00551F51CA412E900AA84EC /* Products */,
+				ABB65DFA5BBA1710B069F306 /* Pods */,
+				EAEB6B7ED9E5E71780AD9EE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +139,13 @@
 		F00551F61CA412E900AA84EC /* TopTunes */ = {
 			isa = PBXGroup;
 			children = (
-				F00551F71CA412E900AA84EC /* AppDelegate.swift */,
-				F00551F91CA412E900AA84EC /* ViewController.swift */,
-				F00551FB1CA412E900AA84EC /* Main.storyboard */,
+				F05EA8591CA4BCCA00585EF3 /* Application */,
+				F05EA8581CA4BB1200585EF3 /* Controller */,
+				F05EA8571CA4BB0A00585EF3 /* View */,
+				F05EA8561CA4BAEE00585EF3 /* Model */,
+				F05EA85A1CA4BD5100585EF3 /* Library */,
+				F00552311CA4133C00AA84EC /* Info.plist */,
 				F00551FE1CA412E900AA84EC /* Assets.xcassets */,
-				F00552001CA412E900AA84EC /* LaunchScreen.storyboard */,
-				F00552031CA412E900AA84EC /* Info.plist */,
 			);
 			path = TopTunes;
 			sourceTree = "<group>";
@@ -111,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				F005520C1CA412E900AA84EC /* TopTunesTests.swift */,
+				F05EA8541CA463ED00585EF3 /* itunes-apple-com-success.json */,
 				F005520E1CA412E900AA84EC /* Info.plist */,
 			);
 			path = TopTunesTests;
@@ -125,6 +169,69 @@
 			path = TopTunesUITests;
 			sourceTree = "<group>";
 		};
+		F05EA8561CA4BAEE00585EF3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F005522B1CA4133C00AA84EC /* Track.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F05EA8571CA4BB0A00585EF3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F05EA85C1CA4BEBD00585EF3 /* UI */,
+				F005522D1CA4133C00AA84EC /* PreviewButton.swift */,
+				F005522A1CA4133C00AA84EC /* TrackCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		F05EA8581CA4BB1200585EF3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F00552271CA4133C00AA84EC /* TrackListTableViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F05EA8591CA4BCCA00585EF3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				F05EA85D1CA4BF1100585EF3 /* UI */,
+				F00551F71CA412E900AA84EC /* AppDelegate.swift */,
+				F05EA8521CA45A5F00585EF3 /* Constants.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		F05EA85A1CA4BD5100585EF3 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				F005522C1CA4133C00AA84EC /* SearchAPI.swift */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		F05EA85C1CA4BEBD00585EF3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F00552291CA4133C00AA84EC /* TrackCell.xib */,
+				F005522E1CA4133C00AA84EC /* ErrorCell.xib */,
+				F005522F1CA4133C00AA84EC /* NoResultCell.xib */,
+				F00552301CA4133C00AA84EC /* LoadingCell.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		F05EA85D1CA4BF1100585EF3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F005523F1CA4134F00AA84EC /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +239,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F005521C1CA412E900AA84EC /* Build configuration list for PBXNativeTarget "TopTunes" */;
 			buildPhases = (
+				468842C6425F4E48B133BF9B /* Check Pods Manifest.lock */,
 				F00551F01CA412E900AA84EC /* Sources */,
 				F00551F11CA412E900AA84EC /* Frameworks */,
 				F00551F21CA412E900AA84EC /* Resources */,
+				F6A3522017BECB10776A1E1C /* Embed Pods Frameworks */,
+				DE88B28E9E9123ADAA727838 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,9 +339,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F00552021CA412E900AA84EC /* LaunchScreen.storyboard in Resources */,
+				F005523B1CA4133C00AA84EC /* ErrorCell.xib in Resources */,
+				F005523D1CA4133C00AA84EC /* LoadingCell.xib in Resources */,
+				F00552411CA4134F00AA84EC /* Main.storyboard in Resources */,
+				F00552361CA4133C00AA84EC /* TrackCell.xib in Resources */,
+				F005523C1CA4133C00AA84EC /* NoResultCell.xib in Resources */,
 				F00551FF1CA412E900AA84EC /* Assets.xcassets in Resources */,
-				F00551FD1CA412E900AA84EC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F05EA8551CA463ED00585EF3 /* itunes-apple-com-success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,13 +365,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		468842C6425F4E48B133BF9B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DE88B28E9E9123ADAA727838 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TopTunes/Pods-TopTunes-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6A3522017BECB10776A1E1C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TopTunes/Pods-TopTunes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F00551F01CA412E900AA84EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F00551FA1CA412E900AA84EC /* ViewController.swift in Sources */,
+				F05EA8531CA45A5F00585EF3 /* Constants.swift in Sources */,
+				F00552341CA4133C00AA84EC /* TrackListTableViewController.swift in Sources */,
+				F00552381CA4133C00AA84EC /* Track.swift in Sources */,
+				F00552391CA4133C00AA84EC /* SearchAPI.swift in Sources */,
+				F005523A1CA4133C00AA84EC /* PreviewButton.swift in Sources */,
 				F00551F81CA412E900AA84EC /* AppDelegate.swift in Sources */,
+				F00552371CA4133C00AA84EC /* TrackCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,25 +458,6 @@
 			targetProxy = F00552141CA412E900AA84EC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F00551FB1CA412E900AA84EC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F00551FC1CA412E900AA84EC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F00552001CA412E900AA84EC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F00552011CA412E900AA84EC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F005521A1CA412E900AA84EC /* Debug */ = {
@@ -379,6 +527,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -397,6 +546,7 @@
 		};
 		F005521D1CA412E900AA84EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 905EA9E05B35E110003F2C87 /* Pods-TopTunes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TopTunes/Info.plist;
@@ -408,6 +558,7 @@
 		};
 		F005521E1CA412E900AA84EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D4F7580605421A67944EAED /* Pods-TopTunes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TopTunes/Info.plist;
@@ -484,6 +635,7 @@
 				F005521E1CA412E900AA84EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F005521F1CA412E900AA84EC /* Build configuration list for PBXNativeTarget "TopTunesTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +644,7 @@
 				F00552211CA412E900AA84EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F00552221CA412E900AA84EC /* Build configuration list for PBXNativeTarget "TopTunesUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +653,7 @@
 				F00552241CA412E900AA84EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

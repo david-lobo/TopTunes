@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TrackCell" id="TCf-nN-Wfs" customClass="TrackCell" customModule="TopTunes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="321" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TCf-nN-Wfs" id="2k1-rD-xXK">
+                <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hza-0N-yqS" userLabel="Name">
+                        <rect key="frame" x="110" y="15" width="196" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBe-kB-Vtk">
+                        <rect key="frame" x="10" y="30" width="25" height="20"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlo-BI-MLG" userLabel="Rank Label">
+                                <rect key="frame" x="0.0" y="-2" width="25" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="0.19215686274509802" green="0.10588235294117647" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="J46-oB-Zfa"/>
+                            <constraint firstItem="dlo-BI-MLG" firstAttribute="leading" secondItem="kBe-kB-Vtk" secondAttribute="leading" id="W75-cc-0ig"/>
+                            <constraint firstAttribute="trailing" secondItem="dlo-BI-MLG" secondAttribute="trailing" id="mAo-BQ-DPH"/>
+                            <constraint firstAttribute="width" constant="25" id="nXU-5f-zcQ"/>
+                            <constraint firstItem="dlo-BI-MLG" firstAttribute="centerY" secondItem="kBe-kB-Vtk" secondAttribute="centerY" id="rph-ab-a57"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9p-Yj-GTc" userLabel="Artist Name">
+                        <rect key="frame" x="110" y="33" width="196" height="31.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVR-wT-YUh" customClass="PreviewButton" customModule="TopTunes" customModuleProvider="target">
+                        <rect key="frame" x="45" y="15" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="D3i-l2-ALS"/>
+                            <constraint firstAttribute="height" constant="50" id="Iof-Oy-P4D"/>
+                        </constraints>
+                        <connections>
+                            <action selector="previewButtonTapped" destination="TCf-nN-Wfs" eventType="touchUpInside" id="NL4-xc-K8R"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="WVR-wT-YUh" firstAttribute="centerY" secondItem="2k1-rD-xXK" secondAttribute="centerY" id="0GZ-hz-K2y"/>
+                    <constraint firstItem="WVR-wT-YUh" firstAttribute="leading" secondItem="kBe-kB-Vtk" secondAttribute="trailing" constant="10" id="Hyg-AO-3sy"/>
+                    <constraint firstAttribute="bottom" secondItem="C9p-Yj-GTc" secondAttribute="bottom" constant="15" id="U38-4a-c0M"/>
+                    <constraint firstAttribute="trailing" secondItem="Hza-0N-yqS" secondAttribute="trailing" constant="15" id="VK5-QW-PLF"/>
+                    <constraint firstItem="Hza-0N-yqS" firstAttribute="leading" secondItem="WVR-wT-YUh" secondAttribute="trailing" constant="15" id="VMm-uq-fFc"/>
+                    <constraint firstItem="kBe-kB-Vtk" firstAttribute="centerY" secondItem="2k1-rD-xXK" secondAttribute="centerY" id="YVw-eR-TeM"/>
+                    <constraint firstAttribute="trailing" secondItem="C9p-Yj-GTc" secondAttribute="trailing" constant="15" id="dtf-1V-VZC"/>
+                    <constraint firstItem="Hza-0N-yqS" firstAttribute="top" secondItem="2k1-rD-xXK" secondAttribute="top" constant="15" id="euP-5f-TNi"/>
+                    <constraint firstItem="C9p-Yj-GTc" firstAttribute="leading" secondItem="WVR-wT-YUh" secondAttribute="trailing" constant="15" id="joA-mI-5FZ"/>
+                    <constraint firstItem="C9p-Yj-GTc" firstAttribute="top" secondItem="Hza-0N-yqS" secondAttribute="bottom" id="kc4-PB-dOu"/>
+                    <constraint firstItem="kBe-kB-Vtk" firstAttribute="leading" secondItem="2k1-rD-xXK" secondAttribute="leading" constant="10" id="wvl-P4-a02"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="artistNameLabel" destination="C9p-Yj-GTc" id="Ik7-JZ-SHJ"/>
+                <outlet property="artworkImageButton" destination="WVR-wT-YUh" id="kml-Ma-2lH"/>
+                <outlet property="nameLabel" destination="Hza-0N-yqS" id="FzH-8T-sOd"/>
+                <outlet property="rankLabel" destination="dlo-BI-MLG" id="Kyg-lL-Koz"/>
+            </connections>
+            <point key="canvasLocation" x="207.5" y="179"/>
+        </tableViewCell>
+    </objects>
+</document>
