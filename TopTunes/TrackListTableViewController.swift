@@ -105,10 +105,9 @@ class TrackListTableViewController: UITableViewController {
             
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
-            if params.success {
-                if !params.success {
-                    self.showError("Error", titleComment: "Error Alert Title", message: "There was an error connecting to iTunes.  Please check your internet connection and try again", messageComment: "Error Alert Message")
-                }
+            if !params.success {
+
+                self.showError("Error", titleComment: "Error Alert Title", message: "There was an error connecting to iTunes.  Please check your internet connection and try again", messageComment: "Error Alert Message")
             }
             
             if ((self.refreshControl?.refreshing) == true) {
