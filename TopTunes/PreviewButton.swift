@@ -40,28 +40,42 @@ class PreviewButton: UIButton {
         stopImageView.frame = CGRect(x: 0, y:0, width: 50, height: 50)
         
         self.addSubview(playImageView)
+        self.addSubview(stopImageView)
+        stopImageView.hidden = true
     }
     
     //*****************************************************************
     // Change to play or pause state with animation
     //*****************************************************************
     
-    func changeState(toState: PreviewButton.State) {
+    func changeState(toState: PreviewButton.State, withAnimation: Bool = true) {
         
         if toState == .Playing {
             
             // Change state to playing
             previewState = .Playing
             
-            // Make the stop button visible
-            UIView.transitionFromView(playImageView, toView: stopImageView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            if withAnimation {
+                stopImageView.hidden = false
+                // Make the stop button visible
+                UIView.transitionFromView(playImageView, toView: stopImageView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            } else {
+                stopImageView.hidden = false
+                playImageView.hidden = true
+            }
         } else if toState == .Stopped {
          
             // Change state to stopped
             previewState = .Stopped
             
-            // Make the play button visible
-            UIView.transitionFromView(stopImageView,toView: playImageView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            if withAnimation {
+                playImageView.hidden = false
+                // Make the play button visible
+                UIView.transitionFromView(stopImageView,toView: playImageView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            } else {
+                stopImageView.hidden = true
+                playImageView.hidden = false
+            }
         }
     }
 }

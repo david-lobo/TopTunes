@@ -46,8 +46,8 @@ class TrackCell: UITableViewCell {
         }
     }
     
-    func setPreviewButtonState(newState: PreviewButton.State) {
-        artworkImageButton.changeState(newState)
+    func setPreviewButtonState(newState: PreviewButton.State, withAnimation: Bool = true) {
+        artworkImageButton.changeState(newState, withAnimation: withAnimation)
     }
     
     @IBAction func previewButtonTapped() {

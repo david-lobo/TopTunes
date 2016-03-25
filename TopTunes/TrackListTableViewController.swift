@@ -42,7 +42,7 @@ class TrackListTableViewController: UITableViewController {
         performRemoteDataUpdate(true)
         
         // Pull to refresh action - disable cache so that its always fresh
-        self.refreshControl?.addTarget(self, action: "perfformRemoteDataUpdateWithoutCache", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -171,6 +171,32 @@ class TrackListTableViewController: UITableViewController {
         })
     }
     
+    func stopPlaying(cell: TrackCell, withAnimation: Bool = true) {
+        
+        // Attempt to stop playback if currently playing
+        if isCurrentlyPlaying {
+            cell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+            currentPlayerIndexPath = nil
+            isCurrentlyPlaying = false
+            player?.pause()
+            player?.rate = 0.0
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
+    func refreshData() {
+        
+        if isCurrentlyPlaying {
+            if let currentPlayerIndexPath = currentPlayerIndexPath {
+                let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell
+        
+                stopPlaying(currentPlayerCell, withAnimation: false)
+            }
+        }
+        perfformRemoteDataUpdateWithoutCache()
+    }
+    
     func showError(title: String, titleComment: String, message: String, messageComment: String) {
         let alert = UIAlertController(
             title: NSLocalizedString(title, comment: titleComment), message: NSLocalizedString(message, comment: messageComment),
@@ -267,7 +293,7 @@ extension TrackListTableViewController {
         stoppedPlayerItem.seekToTime(kCMTimeZero)
         
         let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell
-        currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped)
+        currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
         
         currentPlayerIndexPath = nil
         isCurrentlyPlaying = false
@@ -302,17 +328,7 @@ extension TrackListTableViewController {
 extension TrackListTableViewController: TrackCellDelegate {
     
     func trackCellDidTapStopButton(cell: TrackCell) {
-        
-        // Attempt to stop playback if currently playing
-        if isCurrentlyPlaying {
-            cell.setPreviewButtonState(PreviewButton.State.Stopped)
-            currentPlayerIndexPath = nil
-            isCurrentlyPlaying = false
-            player?.pause()
-            player?.rate = 0.0
-            
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
+        stopPlaying(cell)
     }
     
     func trackCellDidTapStartButton(cell: TrackCell) {
@@ -325,18 +341,18 @@ extension TrackListTableViewController: TrackCellDelegate {
             let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell
             
             // Stop the current player
-            currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped)
+            currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
             currentPlayerIndexPath = indexPath
             isCurrentlyPlaying = true
             
             // Play the newly requested cell
-            cell.setPreviewButtonState(PreviewButton.State.Playing)
+            cell.setPreviewButtonState(PreviewButton.State.Playing, withAnimation: true)
             playWithURL(cell.previewURL)
             
         } else {
             
             // Set the preview button to 'Playing'
-            cell.setPreviewButtonState(PreviewButton.State.Playing)
+            cell.setPreviewButtonState(PreviewButton.State.Playing, withAnimation: true)
             currentPlayerIndexPath = indexPath
             isCurrentlyPlaying = true
             
