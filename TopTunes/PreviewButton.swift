@@ -40,8 +40,6 @@ class PreviewButton: UIButton {
         stopImageView.frame = CGRect(x: 0, y:0, width: 50, height: 50)
         
         self.addSubview(playImageView)
-        self.addSubview(stopImageView)
-        stopImageView.hidden = true
     }
     
     //*****************************************************************
@@ -50,32 +48,27 @@ class PreviewButton: UIButton {
     
     func changeState(toState: PreviewButton.State, withAnimation: Bool = true) {
         
+        var duration = 1.0
+        if !withAnimation {
+            duration = 0.0
+        }
+        
         if toState == .Playing {
             
             // Change state to playing
             previewState = .Playing
             
-            if withAnimation {
-                stopImageView.hidden = false
-                // Make the stop button visible
-                UIView.transitionFromView(playImageView, toView: stopImageView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-            } else {
-                stopImageView.hidden = false
-                playImageView.hidden = true
-            }
+            // Make the stop button visible
+            UIView.transitionFromView(playImageView, toView: stopImageView, duration: duration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            
         } else if toState == .Stopped {
          
             // Change state to stopped
             previewState = .Stopped
             
-            if withAnimation {
-                playImageView.hidden = false
-                // Make the play button visible
-                UIView.transitionFromView(stopImageView,toView: playImageView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-            } else {
-                stopImageView.hidden = true
-                playImageView.hidden = false
-            }
+            playImageView.hidden = false
+            // Make the play button visible
+            UIView.transitionFromView(stopImageView,toView: playImageView, duration: duration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
         }
     }
 }

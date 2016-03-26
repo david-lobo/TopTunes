@@ -26,7 +26,7 @@ class TrackCell: UITableViewCell {
     @IBOutlet weak var artworkImageButton: PreviewButton!
     @IBOutlet weak var rankLabel: UILabel!
 
-    func configureForSearchResult(searchResult: Track, rank: Int) {
+    func configureForSearchResult(searchResult: Track, rank: Int, currentlyPlaying: Bool) {
         
         rankLabel.text = String(rank)
         nameLabel.text = searchResult.name
@@ -44,6 +44,8 @@ class TrackCell: UITableViewCell {
         if searchResult.previewURL != "" {
             previewURL = NSURL(string: searchResult.previewURL)
         }
+        
+        artworkImageButton.changeState(currentlyPlaying ? PreviewButton.State.Playing : PreviewButton.State.Stopped, withAnimation: false)
     }
     
     func setPreviewButtonState(newState: PreviewButton.State, withAnimation: Bool = true) {

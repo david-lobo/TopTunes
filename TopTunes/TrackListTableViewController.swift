@@ -255,7 +255,12 @@ extension TrackListTableViewController {
             // Assign delegate so can catch when button is tapped
             cell.delegate = self
             let searchResult = searchAPI.results[indexPath.row]
-            cell.configureForSearchResult(searchResult, rank: indexPath.row + 1)
+            
+            var currentlyPlaying = false
+            if currentPlayerIndexPath != nil && currentPlayerIndexPath.row == indexPath.row {
+               currentlyPlaying = true
+            }
+            cell.configureForSearchResult(searchResult, rank: indexPath.row + 1, currentlyPlaying: currentlyPlaying)
             return cell
         }
     }
@@ -337,11 +342,15 @@ extension TrackListTableViewController: TrackCellDelegate {
         // Start tapped while another cell is already playing
         if isCurrentlyPlaying {
             
-            // Get the current playing cell
-            let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell
-            
-            // Stop the current player
-            currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+            if let currentPlayerIndexPath = currentPlayerIndexPath {
+                
+                if let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) {
+                
+                let currentTrackCell = currentPlayerCell as! TrackCell
+                // Stop the current player
+                currentTrackCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+                }
+            }
             currentPlayerIndexPath = indexPath
             isCurrentlyPlaying = true
             
