@@ -299,8 +299,9 @@ extension TrackListTableViewController {
         let stoppedPlayerItem: AVPlayerItem = notification.object as! AVPlayerItem
         stoppedPlayerItem.seekToTime(kCMTimeZero)
         
-        let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell
-        currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+        if let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell! {
+            currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+        }
         
         currentPlayerIndexPath = nil
         isCurrentlyPlaying = false
