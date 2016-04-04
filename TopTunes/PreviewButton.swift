@@ -22,9 +22,9 @@ class PreviewButton: UIButton {
     }
     
     var previewState: PreviewButton.State = .Stopped
-    var placeholderImageView: UIImageView!
-    var playImageView: UIImageView!
-    var stopImageView: UIImageView!
+    var placeholderImageView: UIImageView?
+    var playImageView: UIImageView?
+    var stopImageView: UIImageView?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,14 +32,14 @@ class PreviewButton: UIButton {
         // play is either placeholder image or cover art from iTunes
         let playImage = UIImage(named: "music_gray");
         playImageView = UIImageView(image: playImage)
-        playImageView.frame = CGRect(x: 0, y:0, width: 50, height: 50)
+        playImageView!.frame = CGRect(x: 0, y:0, width: 50, height: 50)
         
         // stop is a stop button image
         let stopImage = UIImage(named: "stop");
         stopImageView = UIImageView(image: stopImage)
-        stopImageView.frame = CGRect(x: 0, y:0, width: 50, height: 50)
+        stopImageView!.frame = CGRect(x: 0, y:0, width: 50, height: 50)
         
-        self.addSubview(playImageView)
+        self.addSubview(playImageView!)
     }
     
     //*****************************************************************
@@ -58,17 +58,23 @@ class PreviewButton: UIButton {
             // Change state to playing
             previewState = .Playing
             
-            // Make the stop button visible
-            UIView.transitionFromView(playImageView, toView: stopImageView, duration: duration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            if let stopImageView = stopImageView, playImageView = playImageView {
+                // Make the stop button visible
+                UIView.transitionFromView(playImageView, toView: stopImageView, duration: duration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            }
             
         } else if toState == .Stopped {
          
             // Change state to stopped
             previewState = .Stopped
             
-            playImageView.hidden = false
-            // Make the play button visible
-            UIView.transitionFromView(stopImageView,toView: playImageView, duration: duration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            if let playImageView = playImageView {
+                playImageView.hidden = false
+                if let stopImageView = stopImageView {
+                    // Make the play button visible
+                    UIView.transitionFromView(stopImageView,toView: playImageView, duration: duration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                }
+            }
         }
     }
 }

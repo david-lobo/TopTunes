@@ -13,13 +13,13 @@ import Foundation
 //*****************************************************************
 
 class Track {
-    var name = ""
-    var previewURL = ""
-    var previewType = ""
-    var artistName = ""
-    var artworkURL60 = ""
-    var artworkURL170 = ""
-    var storeURL = ""
-    var kind = ""
-    var price = 0.0
+    var name: String?
+    var previewURL: NSURL?
+    var previewType: String?
+    var artistName: String?
+    var artworkURL60: NSURL?
+    var artworkURL170: NSURL?
+    var storeURL: NSURL?
+    var kind: String?
+    var price: Double?
 }

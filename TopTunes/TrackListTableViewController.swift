@@ -21,7 +21,7 @@ class TrackListTableViewController: UITableViewController {
     var asset: AVURLAsset?
     var player: AVPlayer?
     var playerItem: AVPlayerItem?
-    var currentPlayerIndexPath: NSIndexPath!
+    var currentPlayerIndexPath: NSIndexPath?
     var isCurrentlyPlaying = false
 
     private(set) var searchAPI = SearchAPI()
@@ -111,7 +111,7 @@ class TrackListTableViewController: UITableViewController {
             }
             
             if ((self.refreshControl?.refreshing) == true) {
-                self.refreshControl!.endRefreshing()
+                self.refreshControl?.endRefreshing()
             }
             
             self.tableView.reloadData()
@@ -140,33 +140,36 @@ class TrackListTableViewController: UITableViewController {
                 
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     var error: NSError? = nil
-                    let status: AVKeyValueStatus = self.asset!.statusOfValueForKey("playable", error: &error)
-                    
-                    // If the asset has loaded, can try to play it
-                    if status == AVKeyValueStatus.Loaded {
-                        if let asset = self.asset {
-                            if self.playerItem != nil {
-                                self.playerItem?.removeObserver(self, forKeyPath: "status")
-                            }
-                            
-                            self.playerItem = AVPlayerItem(asset: asset)
-                            
-                            self.playerItem?.addObserver(self, forKeyPath: "status", options:NSKeyValueObservingOptions(), context: nil)
-                            
-                            if self.player != nil {
-                                self.player?.replaceCurrentItemWithPlayerItem(self.playerItem)
-                                self.player?.rate = 1.0
-                            } else {
-                                self.player = AVPlayer(playerItem: self.playerItem!)
-                                
-                            }
-                            self.player?.play()
-                        }
+                    if let status: AVKeyValueStatus = self.asset?.statusOfValueForKey("playable", error: &error) {
                         
-                    } else {
-                        // If asset failed to load, display error alert
-                        self.showError("Error", titleComment: "Error Alert Title", message: error!.localizedDescription, messageComment: "Error Alert Message")
-                        //print("error loading asset\(error!)")
+                        // If the asset has loaded, can try to play it
+                        if status == AVKeyValueStatus.Loaded {
+                            if let asset = self.asset {
+                                
+                                if let _ = self.playerItem {
+                                    self.playerItem?.removeObserver(self, forKeyPath: "status")
+                                }
+                                
+                                let playerItem = AVPlayerItem(asset: asset)
+                                
+                                playerItem.addObserver(self, forKeyPath: "status", options:NSKeyValueObservingOptions(), context: nil)
+                                
+                                if self.player != nil {
+                                    self.player?.replaceCurrentItemWithPlayerItem(playerItem)
+                                    self.player?.rate = 1.0
+                                } else {
+                                    
+                                    self.player = AVPlayer(playerItem: playerItem)
+                                }
+                                self.playerItem = playerItem
+                                self.player?.play()
+                            }
+                            
+                        } else {
+                            // If asset failed to load, display error alert
+                            self.showError("Error", titleComment: "Error Alert Title", message: error!.localizedDescription, messageComment: "Error Alert Message")
+                            //print("error loading asset\(error!)")
+                        }
                     }
                 }
             })
@@ -191,9 +194,10 @@ class TrackListTableViewController: UITableViewController {
         
         if isCurrentlyPlaying {
             if let currentPlayerIndexPath = currentPlayerIndexPath {
-                let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell
-        
-                stopPlaying(currentPlayerCell, withAnimation: false)
+                if let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as? TrackCell {
+                
+                    stopPlaying(currentPlayerCell, withAnimation: false)
+                }
             }
         }
         perfformRemoteDataUpdateWithoutCache()
@@ -242,8 +246,9 @@ extension TrackListTableViewController {
             
             // Displays the Loading cell and animated spinner
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIds.loadingCell, forIndexPath: indexPath)
-            let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
-            spinner.startAnimating()
+            if let spinner = cell.viewWithTag(100) as? UIActivityIndicatorView {
+                spinner.startAnimating()
+            }
             return cell
         case .NoResultsFound:
             
@@ -252,17 +257,23 @@ extension TrackListTableViewController {
         case .ResultsFound:
             
             // Displays and configures the Track cell
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIds.trackCell, forIndexPath: indexPath) as! TrackCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIds.trackCell, forIndexPath: indexPath)
             
-            // Assign delegate so can catch when button is tapped
-            cell.delegate = self
-            let searchResult = searchAPI.results[indexPath.row]
-            
-            var currentlyPlaying = false
-            if currentPlayerIndexPath != nil && currentPlayerIndexPath.row == indexPath.row {
-               currentlyPlaying = true
+            if let cell = cell as? TrackCell {
+                
+                // Assign delegate so can catch when button is tapped
+                cell.delegate = self
+                let searchResult = searchAPI.results[indexPath.row]
+                
+                var currentlyPlaying = false
+                if let currentPlayerIndexPath = currentPlayerIndexPath {
+                    if currentPlayerIndexPath.row == indexPath.row {
+                        currentlyPlaying = true
+                    }
+                }
+                cell.configureForSearchResult(searchResult, rank: indexPath.row + 1, currentlyPlaying: currentlyPlaying)
             }
-            cell.configureForSearchResult(searchResult, rank: indexPath.row + 1, currentlyPlaying: currentlyPlaying)
+            
             return cell
         }
     }
@@ -296,10 +307,11 @@ extension TrackListTableViewController {
     
     func finishedPlaying(notification: NSNotification) {
         //print("finished playing notification")
-        let stoppedPlayerItem: AVPlayerItem = notification.object as! AVPlayerItem
-        stoppedPlayerItem.seekToTime(kCMTimeZero)
+        if let stoppedPlayerItem: AVPlayerItem = notification.object as? AVPlayerItem {
+            stoppedPlayerItem.seekToTime(kCMTimeZero)
+        }
         
-        if let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as! TrackCell! {
+        if let currentPlayerIndexPath = currentPlayerIndexPath, currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) as? TrackCell {
             currentPlayerCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
         }
         
@@ -349,10 +361,11 @@ extension TrackListTableViewController: TrackCellDelegate {
                 
                 if let currentPlayerCell = tableView.cellForRowAtIndexPath(currentPlayerIndexPath) {
                     
-                    let currentTrackCell = currentPlayerCell as! TrackCell
+                    if let currentTrackCell = currentPlayerCell as? TrackCell {
                     
-                    // Stop the current player
-                    currentTrackCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+                        // Stop the current player
+                        currentTrackCell.setPreviewButtonState(PreviewButton.State.Stopped, withAnimation: true)
+                    }
                 }
             }
             currentPlayerIndexPath = indexPath

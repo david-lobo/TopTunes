@@ -32,14 +32,14 @@ class TrackCell: UITableViewCell {
         rankLabel.text = String(rank)
         nameLabel.text = searchResult.name
         
-        if searchResult.artistName.isEmpty {
-            artistNameLabel.text = NSLocalizedString("Unknown", comment: "Empty field value: Artist name")
+        if let artistName = searchResult.artistName {
+            artistNameLabel.text = artistName
         } else {
-            artistNameLabel.text = searchResult.artistName
+            artistNameLabel.text = NSLocalizedString("Unknown", comment: "Empty field value: Artist name")
         }
         
-        if searchResult.previewURL != "" {
-            previewURL = NSURL(string: searchResult.previewURL)
+        if let previewURL = searchResult.previewURL {
+            self.previewURL = previewURL
         }
         
         loadImageWithURL(searchResult)
@@ -56,11 +56,13 @@ class TrackCell: UITableViewCell {
     //*****************************************************************
     
     func loadImageWithURL(searchResult: Track) {
-        if let imageURL = NSURL(string: searchResult.artworkURL60) {
-            if let image = imageCache.objectForKey(searchResult.artworkURL60) as? UIImage {
+        if let imageURL = searchResult.artworkURL60 {
+            if let image = imageCache.objectForKey(imageURL.absoluteString) as? UIImage {
                 
-                // set the ImageView image from the cache
-                artworkImageButton.playImageView.image = image
+                if let _ = artworkImageButton.playImageView {
+                    // set the ImageView image from the cache
+                    artworkImageButton.playImageView?.image = image
+                }
             } else {
                 let downloadTask = NSURLSession.sharedSession().dataTaskWithURL(imageURL, completionHandler: { data, response, error in
                     
@@ -72,11 +74,12 @@ class TrackCell: UITableViewCell {
                     let image = UIImage(data: data!)
                     
                     // set the image to cache
-                    self.imageCache.setObject(image!, forKey: searchResult.artworkURL60)
+                    self.imageCache.setObject(image!, forKey: (searchResult.artworkURL60?.absoluteString)!)
                     
                     dispatch_async(dispatch_get_main_queue()) {
-                        
-                        self.artworkImageButton.playImageView.image = image
+                        if let _ = self.artworkImageButton.playImageView {
+                            self.artworkImageButton.playImageView?.image = image
+                        }
                     }
                 })
                 

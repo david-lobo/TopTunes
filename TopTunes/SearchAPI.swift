@@ -56,43 +56,45 @@ class SearchAPI {
                 session = NSURLSession(configuration: config)
             }
         
-            dataTask = session.dataTaskWithURL(Constants.apiURL!, completionHandler: {
-                data, response, error in
-                
-                self.status = .NotSearched
-                var success = false
-                self.currentError = nil
-                
-                if let error = error where error.code == -999 {
-                    self.status = .Error
-                    self.currentError = error
-                }
-                
-                if response != nil {
-                    if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
-                        if let data = data, dictionary = self.parseJSON(data) {
-                            let searchResults = self.parseDictionary(dictionary)
-                            
-                            if searchResults.isEmpty {
-                                self.status = .NoResultsFound
-                            } else {
-                                self.status = .ResultsFound
+            if let apiURL = Constants.apiURL {
+                dataTask = session.dataTaskWithURL(apiURL, completionHandler: {
+                    data, response, error in
+                    
+                    self.status = .NotSearched
+                    var success = false
+                    self.currentError = nil
+                    
+                    if let error = error where error.code == -999 {
+                        self.status = .Error
+                        self.currentError = error
+                    }
+                    
+                    if response != nil {
+                        if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
+                            if let data = data, dictionary = self.parseJSON(data) {
+                                let searchResults = self.parseDictionary(dictionary)
+                                
+                                if searchResults.isEmpty {
+                                    self.status = .NoResultsFound
+                                } else {
+                                    self.status = .ResultsFound
+                                }
+                                success = true
+                                self.results = searchResults
                             }
-                            success = true
-                            self.results = searchResults
+                        } else {
+                            self.status = .Error
                         }
                     } else {
                         self.status = .Error
                     }
-                } else {
-                    self.status = .Error
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    completion(success: success, results: self.results, error: self.currentError)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        completion(success: success, results: self.results, error: self.currentError)
+                    })
                 })
-            })
-            dataTask?.resume()
+                dataTask?.resume()
+            }
         }
     
     //*****************************************************************
@@ -144,11 +146,15 @@ class SearchAPI {
         let searchResult = Track()
         
         if let nameDict = dictionary["im:name"] as? [String: AnyObject] {
-            searchResult.name = nameDict["label"] as! String
+            if let name = nameDict["label"] as? String {
+                searchResult.name = name
+            }
         }
         
         if let nameDict = dictionary["im:artist"] as? [String: AnyObject] {
-            searchResult.artistName = nameDict["label"] as! String
+            if let artistName = nameDict["label"] as? String {
+                searchResult.artistName = artistName
+            }
         }
         
         if let linkArray = dictionary["link"] as? [AnyObject] {
@@ -161,14 +167,14 @@ class SearchAPI {
                     if let linkType = linkAttr["type"] as? String,
                         let href = linkAttr["href"] as? String {
                          
-                            if let linkAssetType = linkAttr["im:assetType"] as? String {
-                                if linkAssetType == "preview" && linkType == "audio/x-m4a" {
-                                    searchResult.previewType = linkType
-                                    searchResult.previewURL = href
-                                }
-                            } else if linkType == "text/html" {
-                                searchResult.storeURL = href
+                        if let linkAssetType = linkAttr["im:assetType"] as? String {
+                            if linkAssetType == "preview" && linkType == "audio/x-m4a" {
+                                searchResult.previewType = linkType
+                                searchResult.previewURL = NSURL(string: href)
                             }
+                        } else if linkType == "text/html" {
+                            searchResult.storeURL = NSURL(string: href)
+                        }
                     }
                 }
             }
@@ -183,9 +189,9 @@ class SearchAPI {
                     
                     if let imageHeight = imageAttr["height"] as? String {
                         if imageHeight == "60" {
-                            searchResult.artworkURL60 = imageLabel
+                            searchResult.artworkURL60 = NSURL(string: imageLabel)
                         } else if imageHeight == "170" {
-                            searchResult.artworkURL170 = imageLabel
+                            searchResult.artworkURL170 = NSURL(string: imageLabel)
                         }
                     }
                 }
