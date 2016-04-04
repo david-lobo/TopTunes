@@ -64,29 +64,29 @@ class SearchAPI {
                     var success = false
                     self.currentError = nil
                     
-                    if let error = error where error.code == -999 {
+                    if let error = error {
                         self.status = .Error
                         self.currentError = error
-                    }
-                    
-                    if response != nil {
-                        if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
-                            if let data = data, dictionary = self.parseJSON(data) {
-                                let searchResults = self.parseDictionary(dictionary)
-                                
-                                if searchResults.isEmpty {
-                                    self.status = .NoResultsFound
-                                } else {
-                                    self.status = .ResultsFound
+                    } else {
+                        if response != nil {
+                            if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
+                                if let data = data, dictionary = self.parseJSON(data) {
+                                    let searchResults = self.parseDictionary(dictionary)
+                                    
+                                    if searchResults.isEmpty {
+                                        self.status = .NoResultsFound
+                                    } else {
+                                        self.status = .ResultsFound
+                                    }
+                                    success = true
+                                    self.results = searchResults
                                 }
-                                success = true
-                                self.results = searchResults
+                            } else {
+                                self.status = .Error
                             }
                         } else {
                             self.status = .Error
                         }
-                    } else {
-                        self.status = .Error
                     }
                     
                     dispatch_async(dispatch_get_main_queue(), {
